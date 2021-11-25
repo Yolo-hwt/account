@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/class-diagram
+package client {
+package frameProcess{
+class applyProcess
+note bottom of applyProcess:用户请求进程处理
+class userloginProcess
+note bottom of userloginProcess:用户登录进程处理
+}
+note top of frameProcess:界面进程处理
+package mainGUI{
+class userLoginFrame
+note left:用户登录主界面
+}
+package user{
+class userMainFrame
+class applyOperaTion
+note left:用户主界面
+}
+note top of user:用户功能主界面
+class client_side {
+client_side static  Myclient
+void sendData()
+message getData()
+}
+note left: 客户端
+
+}
+
+userloginProcess <-- userLoginFrame:调用关系
+userMainFrame <-- userloginProcess:调用用户主界面
+
+applyOperaTion <|-- userMainFrame
+
+applyProcess <-- applyOperaTion:调用请求处理
+
+client_side <.. applyProcess
+client_side<.. userloginProcess
+@enduml

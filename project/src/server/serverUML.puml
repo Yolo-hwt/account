@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package server{
+package admin{
+package adminFunc{
+note top of adminFunc:管理员功能界面
+}
+class adminLoginFrame
+class adminloginProcess
+class adminMainFrame
+}
+package dataBase{
+class dataProcessing
+note top:数据库处理类
+}
+package mysqlDatabase <<Database>>{
+
+}
+package server_side{
+class serverConnection
+note bottom:服务器交互类
+class server_AdminProcess
+note bottom:管理员交互类
+class serverFunction
+note bottom:服务器功能类
+class server_UserProcess
+note bottom:用户交互类
+}
+adminloginProcess<--adminLoginFrame
+adminMainFrame<--adminloginProcess
+client<..>adminloginProcess
+
+adminFunc<--adminMainFrame
+client<..>adminFunc
+
+server_AdminProcess<|--serverConnection
+server_UserProcess<|--serverConnection
+
+serverFunction<--server_UserProcess
+serverFunction<--server_AdminProcess
+
+serverFunction<..>dataProcessing
+
+dataProcessing<..>mysqlDatabase
+
+serverConnection<..>client:与客户端信息交互
+
+
+}
+
+@enduml
